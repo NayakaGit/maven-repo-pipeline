@@ -1,8 +1,8 @@
 pipeline {
     // add your slave label name
-    agent { label 'my-first-jenkins-slave-server'}
+    agent { label 'slave_node'}
     tools{
-        maven 'maven-test'
+        maven 'maven1'
     }
     stages {
         stage ('Checkout_SCM') {
@@ -23,7 +23,7 @@ pipeline {
         stage ('Deploy_Tomcat') {
 
             steps {
-	      sshagent(['My-Tomcat-server']) {
+	      sshagent(['tomcat']) {
               sh "scp -o StrictHostKeyChecking=no  target/maven-web-application.war  ec2-user@3.80.28.76:/opt/tomcat9/webapps"
 	      }
          }
